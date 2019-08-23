@@ -8,10 +8,10 @@ router.post('/', getCode);
 module.exports = router;
 
 function getCode (req, res, next) {
-  console.log('req.body', JSON.parse(req.body));
-  
+  console.log('req.body', req.body);
 
   getCodeService.getCode(req.user.sub, req.body.link)
+  // getCodeService.getCode(req.user.sub)
     .then(uniqCode => res.json(uniqCode))
     .catch(err => next(err));
 }

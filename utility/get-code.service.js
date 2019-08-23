@@ -6,6 +6,7 @@ module.exports = {
 };
 
 async function getCode(userID, inpURL) {
+// async function getCode(userID) {
   const USER = await User.findById(userID);
 console.log('inpURL', inpURL);
 
