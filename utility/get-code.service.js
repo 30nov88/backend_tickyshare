@@ -32,17 +32,14 @@ async function getLinkAndDelete ( inpCode ) {
 }
 
 async function getLink ( userID, inpCode ) {
-  let publicUser = await PublicUsers.findOne({});
+  let user = await User.findById(userID);  
   let spliceValue = {};
 
-  if ( publicUser ) {
-    let spliceIndex = publicUser.savedLinks.findIndex(obj => Object.keys(obj)[0] === inpCode);
+  if ( user ) {
+    let spliceIndex = user.savedLinks.findIndex(obj => Object.keys(obj)[0] === inpCode);
 
     if ( spliceIndex !== -1 ) {
-      spliceValue = publicUser.savedLinks[spliceIndex][inpCode];
-      // publicUser.savedLinks.splice(spliceIndex, 1);
-      // publicUser.totalCount = (publicUser.totalCount ? publicUser.totalCount : 0) - 1;
-      // await publicUser.save();
+      spliceValue = user.savedLinks[spliceIndex][inpCode];
     } else {
       // THROW INVALID CODE ERROR
     }
