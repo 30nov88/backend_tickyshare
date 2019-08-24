@@ -58,9 +58,16 @@ async function getCode ( inpURL ) {
     publicUser = new PublicUsers();
   }
 
+  // CHECK IF RANDNUM IS ALREADY PRESENT
+// ELSE GENERATE NEW NUMBER
+// LOOP UNTIL
+
   let linkObj = {
-    [randNum] : inpURL
+    [randNum] : inpURL,
+    expiry: "find"
   };
+
+  // FIND THE LATEST UPCOMING 24 HOUR CYCLE AND ADD THAT UTC AS EXPIRY TIME
 
   publicUser.savedLinks.push(linkObj);
   publicUser.totalCount = (publicUser.totalCount ? publicUser.totalCount : 0) + 1;
@@ -73,7 +80,11 @@ async function saveLinkGetCode ( userID, inpURL ) {
   const USER = await User.findById(userID);
   let randNum = Math.floor(1000 + Math.random() * 9000);
 
-  let linkObj = {
+  // INCLUDE COUNT VARIABLE AND USE THE RANDNUM TO BE COUNT VARIABLE
+// OR
+// USE THE LENGTH + 1000 AS RANDNUM
+
+let linkObj = {
     [randNum] : inpURL
   };
 
